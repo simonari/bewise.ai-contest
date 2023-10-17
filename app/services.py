@@ -39,7 +39,7 @@ async def check_ids(question_ids: list[int], db: "Session") -> list[int]:
 
 
 async def last_question(db: "Session") -> schemas.QuestionResponse:
-    query = select(models.Question).order_by(models.Question.created_at.desc())
+    query = select(models.Question).order_by(models.Question.saved_at.desc())
     result = db.execute(query).first()[0]
 
     return schemas.QuestionResponse(question=result.question)
