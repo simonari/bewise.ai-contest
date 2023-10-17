@@ -6,10 +6,10 @@ services:
     container_name: bewise.ai.db
 
     volumes:
-      - "./db-pg:/var/lib/postgres/data/"
+      - "./db-pg:/var/lib/postgresql/data/"
 
     ports:
-      - "5432:5432"
+      - "5423:5432"
 
     environment:
       POSTGRES_USER: postgres
