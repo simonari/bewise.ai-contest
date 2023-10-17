@@ -39,8 +39,3 @@ async def retrieve_questions(questions_num: int,
         await services.add_questions(to_add, db)
 
     return last_question
-
-
-@app.get("/{questions_num}")
-async def show_last():
-    pass
