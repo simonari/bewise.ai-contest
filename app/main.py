@@ -6,6 +6,7 @@ from . import services
 from .ext import quiz
 
 app = FastAPI()
+services.add_tables()
 
 MAX_ATTEMPTS = 5
 
