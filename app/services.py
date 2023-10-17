@@ -1,10 +1,9 @@
 from typing import TYPE_CHECKING
+from sqlalchemy import select
 
 from . import database
 from . import models
 from . import schemas
-
-from sqlalchemy import select
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
