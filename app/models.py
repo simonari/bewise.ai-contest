@@ -1,3 +1,4 @@
+import datetime
 import sqlalchemy as sql
 import sqlalchemy.orm as orm
 
@@ -13,6 +14,7 @@ class Question(Base):
     question = sql.Column(sql.Text)
     answer = sql.Column(sql.Text)
     created_at = sql.Column(sql.DateTime)
+    saved_at = sql.Column(sql.DateTime, default=datetime.datetime.now())
 
     def __repr__(self) -> str:
         return f"Question No. {self.id}. Q: {self.question}. A: {self.answer}. Was created: {self.created_at}"
