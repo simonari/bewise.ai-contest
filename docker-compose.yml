@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bewise.ai.db
+
+    volumes:
+      - "./db-pg:/var/lib/postgres/data/"
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    restart: always
+
+networks:
+  defaul:
+    driver: bridge
+    name: bewise.ai
