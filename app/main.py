@@ -13,6 +13,8 @@ MAX_ATTEMPTS = 5
 @app.post("/{questions_num}")
 async def retrieve_questions(questions_num: int,
                              db: orm.Session = fastapi.Depends(services.get_db)):
+    last_question = await services.last_question(db)
+
     attempt = 0
     remaining = questions_num
     while attempt < MAX_ATTEMPTS and remaining > 0:
@@ -35,7 +37,7 @@ async def retrieve_questions(questions_num: int,
 
         await services.add_questions(to_add, db)
 
-    return await services.last_question(db)
+    return last_question
 
 
 @app.get("/{questions_num}")
