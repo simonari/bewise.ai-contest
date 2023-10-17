@@ -3,21 +3,22 @@ version: "3.5"
 services:
   db:
     image: postgres:16-alpine
-    container_name: bewise.ai.db
+    container_name: "${POSTGRES_CONTAINER_NAME}"
 
     volumes:
-      - "./db-pg:/var/lib/postgresql/data/"
+      - "${POSTGRES_DOCKER_VOLUME}:/var/lib/postgresql/data/"
 
     ports:
       - "5432:5432"
 
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
 
     restart: always
 
 networks:
   defaul:
     driver: bridge
-    name: bewise.ai
+    name: "${DOCKER_NETWORK}"
