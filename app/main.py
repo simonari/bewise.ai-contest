@@ -1,20 +1,19 @@
 import fastapi
 from fastapi import FastAPI
 import sqlalchemy.orm as orm
-from . import schemas
-from . import services
+from .services import DataBaseManager
 from .ext import quiz
 
 app = FastAPI()
-services.add_tables()
+db_manager = DataBaseManager()
 
 MAX_ATTEMPTS = 5
 
 
 @app.post("/{questions_num}")
 async def retrieve_questions(questions_num: int,
-                             db: orm.Session = fastapi.Depends(services.get_db)):
-    last_question = await services.last_question(db)
+                             db: orm.Session = fastapi.Depends(db_manager.get_db)):
+    last_question = await db_manager.last_question(db)
 
     attempt = 0
     remaining = questions_num
@@ -22,7 +21,7 @@ async def retrieve_questions(questions_num: int,
         questions = quiz.get_questions(remaining)
 
         ids = [q.id for q in questions]
-        ids_in_db = await services.check_ids(ids, db)
+        ids_in_db = await db_manager.check_ids(ids, db)
         ids_not_in_db = [i for i in ids if i not in ids_in_db]
 
         to_add = []
@@ -36,6 +35,6 @@ async def retrieve_questions(questions_num: int,
         remaining = len(ids) - len(ids_not_in_db)
         attempt += 1
 
-        await services.add_questions(to_add, db)
+        await db_manager.add_questions(to_add, db)
 
     return last_question
