@@ -7,7 +7,9 @@ $ git clone "https://github.com/simonari/bewise.ai-contest.git" "/dir/to/save"
 ```
 
 <h3>Set up environment variables</h3>
+
 ``.env file``
+
 ```dotenv
 DOCKER_NETWORK="bewise.ai"
 
@@ -49,5 +51,5 @@ POST /1 HTTP/1.1
 
 Response:
 ```json
-{"question": "I've done good work. haven't I?"}
+{"question": "I've done good work, haven't I?"}
 ```
