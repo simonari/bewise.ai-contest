@@ -29,6 +29,18 @@ More detailed explanation of values available in file.
 ```bash
 $ docker compose up
 ```
+<h3>Set up python virtual environment</h3>
+
+```bash
+$ python3 -m venv "dir/to/venv/"
+```
+
+<h3>Lead down to created virtual environment and activate</h3>
+
+```bash
+$ cd "dir/to/venv/bin"
+$ source activate
+```
 
 <h3>Set up python dependencies</h3>
 
